@@ -14,16 +14,134 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cargas: {
+        Row: {
+          created_at: string
+          data_coleta: string
+          destino_cidade: string
+          destino_estado: string
+          id: string
+          observacoes: string | null
+          origem_cidade: string
+          origem_estado: string
+          peso_kg: number
+          status: Database["public"]["Enums"]["carga_status"]
+          tipo_carga: string
+          tipo_carroceria: string | null
+          tipo_veiculo: string
+          updated_at: string
+          user_id: string
+          valor_frete: number | null
+        }
+        Insert: {
+          created_at?: string
+          data_coleta: string
+          destino_cidade: string
+          destino_estado: string
+          id?: string
+          observacoes?: string | null
+          origem_cidade: string
+          origem_estado: string
+          peso_kg: number
+          status?: Database["public"]["Enums"]["carga_status"]
+          tipo_carga: string
+          tipo_carroceria?: string | null
+          tipo_veiculo: string
+          updated_at?: string
+          user_id: string
+          valor_frete?: number | null
+        }
+        Update: {
+          created_at?: string
+          data_coleta?: string
+          destino_cidade?: string
+          destino_estado?: string
+          id?: string
+          observacoes?: string | null
+          origem_cidade?: string
+          origem_estado?: string
+          peso_kg?: number
+          status?: Database["public"]["Enums"]["carga_status"]
+          tipo_carga?: string
+          tipo_carroceria?: string | null
+          tipo_veiculo?: string
+          updated_at?: string
+          user_id?: string
+          valor_frete?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          cidade: string | null
+          created_at: string
+          empresa: string | null
+          estado: string | null
+          id: string
+          nome_completo: string
+          telefone: string | null
+          tipo: Database["public"]["Enums"]["user_type"]
+          updated_at: string
+        }
+        Insert: {
+          cidade?: string | null
+          created_at?: string
+          empresa?: string | null
+          estado?: string | null
+          id: string
+          nome_completo: string
+          telefone?: string | null
+          tipo?: Database["public"]["Enums"]["user_type"]
+          updated_at?: string
+        }
+        Update: {
+          cidade?: string | null
+          created_at?: string
+          empresa?: string | null
+          estado?: string | null
+          id?: string
+          nome_completo?: string
+          telefone?: string | null
+          tipo?: Database["public"]["Enums"]["user_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      carga_status: "ativa" | "negociando" | "fechada" | "cancelada"
+      user_type: "motorista" | "embarcador" | "transportadora"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +268,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      carga_status: ["ativa", "negociando", "fechada", "cancelada"],
+      user_type: ["motorista", "embarcador", "transportadora"],
+    },
   },
 } as const
