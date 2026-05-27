@@ -9,8 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PublicarCargaRouteImport } from './routes/publicar-carga'
+import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
+import { Route as BuscarCargasRouteImport } from './routes/buscar-cargas'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PublicarCargaRoute = PublicarCargaRouteImport.update({
+  id: '/publicar-carga',
+  path: '/publicar-carga',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuscarCargasRoute = BuscarCargasRouteImport.update({
+  id: '/buscar-cargas',
+  path: '/buscar-cargas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +43,83 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buscar-cargas': typeof BuscarCargasRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/planos': typeof PlanosRoute
+  '/publicar-carga': typeof PublicarCargaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buscar-cargas': typeof BuscarCargasRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/planos': typeof PlanosRoute
+  '/publicar-carga': typeof PublicarCargaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buscar-cargas': typeof BuscarCargasRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/planos': typeof PlanosRoute
+  '/publicar-carga': typeof PublicarCargaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/buscar-cargas'
+    | '/como-funciona'
+    | '/planos'
+    | '/publicar-carga'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/buscar-cargas' | '/como-funciona' | '/planos' | '/publicar-carga'
+  id:
+    | '__root__'
+    | '/'
+    | '/buscar-cargas'
+    | '/como-funciona'
+    | '/planos'
+    | '/publicar-carga'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuscarCargasRoute: typeof BuscarCargasRoute
+  ComoFuncionaRoute: typeof ComoFuncionaRoute
+  PlanosRoute: typeof PlanosRoute
+  PublicarCargaRoute: typeof PublicarCargaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/publicar-carga': {
+      id: '/publicar-carga'
+      path: '/publicar-carga'
+      fullPath: '/publicar-carga'
+      preLoaderRoute: typeof PublicarCargaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-funciona': {
+      id: '/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof ComoFuncionaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buscar-cargas': {
+      id: '/buscar-cargas'
+      path: '/buscar-cargas'
+      fullPath: '/buscar-cargas'
+      preLoaderRoute: typeof BuscarCargasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +132,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuscarCargasRoute: BuscarCargasRoute,
+  ComoFuncionaRoute: ComoFuncionaRoute,
+  PlanosRoute: PlanosRoute,
+  PublicarCargaRoute: PublicarCargaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
