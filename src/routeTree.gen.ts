@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicarCargaRouteImport } from './routes/publicar-carga'
 import { Route as PlanosRouteImport } from './routes/planos'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as BuscarCargasRouteImport } from './routes/buscar-cargas'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CargaIdRouteImport } from './routes/carga.$id'
 
 const PublicarCargaRoute = PublicarCargaRouteImport.update({
   id: '/publicar-carga',
@@ -23,6 +26,11 @@ const PublicarCargaRoute = PublicarCargaRouteImport.update({
 const PlanosRoute = PlanosRouteImport.update({
   id: '/planos',
   path: '/planos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
@@ -35,59 +43,95 @@ const BuscarCargasRoute = BuscarCargasRouteImport.update({
   path: '/buscar-cargas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CargaIdRoute = CargaIdRouteImport.update({
+  id: '/carga/$id',
+  path: '/carga/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/buscar-cargas': typeof BuscarCargasRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/dashboard': typeof DashboardRoute
   '/planos': typeof PlanosRoute
   '/publicar-carga': typeof PublicarCargaRoute
+  '/carga/$id': typeof CargaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/buscar-cargas': typeof BuscarCargasRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/dashboard': typeof DashboardRoute
   '/planos': typeof PlanosRoute
   '/publicar-carga': typeof PublicarCargaRoute
+  '/carga/$id': typeof CargaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/buscar-cargas': typeof BuscarCargasRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/dashboard': typeof DashboardRoute
   '/planos': typeof PlanosRoute
   '/publicar-carga': typeof PublicarCargaRoute
+  '/carga/$id': typeof CargaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/buscar-cargas'
     | '/como-funciona'
+    | '/dashboard'
     | '/planos'
     | '/publicar-carga'
+    | '/carga/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/buscar-cargas' | '/como-funciona' | '/planos' | '/publicar-carga'
+  to:
+    | '/'
+    | '/auth'
+    | '/buscar-cargas'
+    | '/como-funciona'
+    | '/dashboard'
+    | '/planos'
+    | '/publicar-carga'
+    | '/carga/$id'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/buscar-cargas'
     | '/como-funciona'
+    | '/dashboard'
     | '/planos'
     | '/publicar-carga'
+    | '/carga/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   BuscarCargasRoute: typeof BuscarCargasRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
+  DashboardRoute: typeof DashboardRoute
   PlanosRoute: typeof PlanosRoute
   PublicarCargaRoute: typeof PublicarCargaRoute
+  CargaIdRoute: typeof CargaIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -106,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/como-funciona': {
       id: '/como-funciona'
       path: '/como-funciona'
@@ -120,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuscarCargasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -127,15 +185,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/carga/$id': {
+      id: '/carga/$id'
+      path: '/carga/$id'
+      fullPath: '/carga/$id'
+      preLoaderRoute: typeof CargaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   BuscarCargasRoute: BuscarCargasRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
+  DashboardRoute: DashboardRoute,
   PlanosRoute: PlanosRoute,
   PublicarCargaRoute: PublicarCargaRoute,
+  CargaIdRoute: CargaIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
