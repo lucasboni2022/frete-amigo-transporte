@@ -3,15 +3,12 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build && node -e \"require('fs').writeFileSync('dist/package.json', JSON.stringify({name:'frete-amigo',version:'1.0.0',type:'module',scripts:{start:'node server/server.js'}},null,2))\"",
-    "build:dev": "vite build --mode development",
-    "preview": "vite preview",
-    "start": "node server.js",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
+"scripts": {
+  "dev": "vite",
+  "build": "npm install --legacy-peer-deps && vite build",
+  "start": "node server.js",
+  "preview": "vite preview"
+},
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
