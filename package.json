@@ -4,11 +4,11 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
+    "dev": "vite",
+    "build": "vite build && node -e \"require('fs').writeFileSync('dist/package.json', JSON.stringify({name:'frete-amigo',version:'1.0.0',type:'module',scripts:{start:'node server/server.js'}},null,2))\"",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
-    "start": "node .output/server/index.mjs",
+    "start": "node server.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -51,6 +51,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
+    "express": "^5.2.1",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.575.0",
     "react": "^19.2.0",
